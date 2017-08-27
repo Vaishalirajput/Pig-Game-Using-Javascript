@@ -12,50 +12,28 @@ var scores, roundScore, activePlayer, gamePlaying;  //, dice
 
 init();
 
-//dice = Math.floor(Math.random() * 6) + 1;
-//console.log(dice);
-
-//textContent
-//document.querySelector('#current-' + activePlayer).textContent = dice;
-
- //document.querySelector('#current-' + activePlayer).innerHTML = '<em>' + dice + '</em>';
- //var x = document.querySelector('#score-0').textContent;
- //console.log(x);
-
  document.querySelector('.dice').style.display = 'none';
  document.getElementById('score-0').textContent = '0';
  document.getElementById('score-1').textContent = '0';
  document.getElementById('current-0').textContent = '0';
  document.getElementById('current-1').textContent = '0';
 
- //function btn(){
-    //Do something here
- //}
-
- //document.querySelector('.btn-roll').addEventListener('click', btn());
 
  document.querySelector('.btn-roll').addEventListener('click', function(){
  	if(gamePlaying){
-
-  //1. Random number
  	var dice = Math.floor(Math.random() * 6) + 1;
-
- 	//2. display result
  	var diceDOM = document.querySelector('.dice');
-    diceDOM.style.display = 'block';
-    diceDOM.src = 'dice-' + dice + '.png';
+        diceDOM.style.display = 'block';
+        diceDOM.src = 'dice-' + dice + '.png';
+       if(dice !== 1){
+   	 roundScore += dice;
+   	 document.querySelector('#current-' + activePlayer).textContent = roundScore;
+       }else
+       {
+	       nextPlayer();
 
- 	//3. Update the round core if the rolled number was not a 1
-   if(dice !== 1){
-   	//add score
-   	roundScore += dice;
-   	document.querySelector('#current-' + activePlayer).textContent = roundScore;
-   } else {
-   	//next player 
-   nextPlayer();
-
-   }
-  }
+       }
+       }
 
  });
 
@@ -73,7 +51,7 @@ document.querySelector('.btn-hold').addEventListener('click', function(){
   }
 
   //check if player win the game
-  if(scores[activePlayer] >= 10){
+  if(scores[activePlayer] >= 100){
 	  document.querySelector('#name-' + activePlayer).textContent = 'Winner!'
 	  document.querySelector('.dice').style.display = 'none';
 	  document.querySelector('.player-' +  activePlayer + '-panel').classList.add('winner');
